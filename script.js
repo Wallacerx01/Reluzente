@@ -77,31 +77,35 @@ const pratosSemana = [
 const bebidasSemana = [
   {
     name: "Coca lata",
-    description: "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+    description:
+      "​​​​​Coca-Cola — o sabor icônico que complementa perfeitamente cada momento à mesa.",
     price: 6.0,
     img: "./assets/refri-1.png",
   },
   {
     name: "Guaraná lata",
-    description: "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+    description:
+      "Guaraná Antarctica — o sabor brasileiro que refresca e anima seus momentos à mesa.",
     price: 6.0,
     img: "./assets/refri-2.png",
   },
   {
     name: "Coca zero lata",
-    description: "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+    description: "Coca-Cola Zero — o sabor autêntico da Coca, sem açúcar.",
     price: 6.0,
     img: "./assets/cocazero.png",
   },
   {
     name: "La fruit",
-    description: "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+    description:
+      "La Fruit — a combinação perfeita de frutas naturais e frescor.",
     price: 6.0,
     img: "./assets/lafruit.png",
   },
   {
     name: "Água mineral",
-    description: "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+    description:
+      "Água mineral — pureza e frescor naturais para hidratar seu corpo.",
     price: 4.0,
     img: "./assets/agua.png",
   },
@@ -145,7 +149,16 @@ const pratosDoDia = pratosSemana.filter((prato) => prato.dias.includes(hoje));
 
 pratosDoDia.forEach((prato, index) => {
   const item = document.createElement("div");
-  item.classList.add("flex", "gap-2");
+  item.classList.add(
+    "flex",
+    "items-center",
+    "justify-start",
+    "gap-4",
+    "p-4",
+    "rounded-lg",
+    "shadow-md",
+    "bg-white"
+  );
   item.innerHTML = `
     <img src="${prato.img}" alt="${
     prato.name
@@ -168,26 +181,44 @@ pratosDoDia.forEach((prato, index) => {
 });
 
 // ------------------ MONTAR BEBIDAS ------------------
-menuBebidas.innerHTML = "";
 bebidasSemana.forEach((bebida) => {
   const item = document.createElement("div");
-  item.classList.add("flex", "gap-2");
+  item.classList.add(
+    "flex",
+    "gap-3",
+    "items-center",
+    "bg-white",
+    "rounded-lg",
+    "shadow-md",
+    "p-3"
+  );
+
   item.innerHTML = `
-    <img src="${bebida.img}" alt="${
-    bebida.name
-  }" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300" />
-    <div>
+    <img
+      src="${bebida.img}"
+      alt="${bebida.name}"
+      class="w-24 h-24 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
+    />
+
+    <div class="flex-1 flex flex-col justify-between h-full">
       <p class="font-bold">${bebida.name}</p>
-      <p class="text-sm">${bebida.description}</p>
-      <div class="flex items-center gap-2 justify-between mt-3">
-        <p class="font-bold text-lg">R$ ${bebida.price.toFixed(2)}</p>
-        <button class="bg-gray-900 px-5 rounded add-to-cart-btn hover:scale-105 duration-200"
-          data-name="${bebida.name}" data-price="${bebida.price}">
+      <p class="text-sm text-gray-500">${bebida.description || ""}</p>
+
+      <div class="flex items-center justify-between mt-3">
+        <p class="font-bold text-lg whitespace-nowrap">R$ ${bebida.price.toFixed(
+          2
+        )}</p>
+        <button
+          class="bg-gray-900 px-5 rounded add-to-cart-btn hover:scale-105 duration-200"
+          data-name="${bebida.name}"
+          data-price="${bebida.price}"
+        >
           <i class="fa fa-cart-plus text-lg text-white"></i>
         </button>
       </div>
     </div>
   `;
+
   menuBebidas.appendChild(item);
 });
 
