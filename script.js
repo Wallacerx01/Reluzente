@@ -3,18 +3,18 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, quiabo suculento e salada fresca de repolho com tomate, servidos com frango ao molho ou acém em pedaços.",
-    price: 30.9,
+      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, quiabo suculento e salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
+    price: 29.99,
     img: "./assets/marmita-1.png",
     dias: [1], // Segunda
     feijao: ["Carioca"],
-    carne: ["Frango ao molho", "Acém em pedaços"],
+    carne: ["Frango ao molho", "Bife suculento"],
   },
   {
     name: "Menu do dia",
     description:
       "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia, ovo, e uma salada colorida com beterraba, alface, cenoura e tomate, servidos com costelinha de porco ou bife de carne.",
-    price: 30.9,
+    price: 29.99,
     img: "./assets/marmita-2.png",
     dias: [2], // Terça
     feijao: ["Carioca"],
@@ -24,47 +24,47 @@ const pratosSemana = [
     name: "Menu do dia",
     description:
       "Arroz soltinho e feijão fresquinho, macarrão e um mix de legumes no vapor com brócolis, couve-flor, cenoura e vagem. Servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
-    price: 30.9,
+    price: 29.99,
     img: "./assets/marmita-1.png",
     dias: [3], // Quarta
     feijao: ["Carioca"],
     carne: ["Frango grelhado", "Costela com mandioca"],
   },
   {
-    name: "Menu do dia + Surpresa do Amor Grátis!",
+    name: "Menu do dia + Morango do Amor Grátis!",
     description:
-      "Arroz soltinho, feijão fresquinho, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou bife suculento.",
-    price: 30.9,
-    img: "./assets/menu do dia.png",
+      "Arroz soltinho, feijão fresquinho, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
+    price: 29.99,
+    img: "./assets/quinta-feira.png",
     dias: [4], // Quinta
     feijao: ["Carioca", "Tropeiro"],
-    carne: ["Frango assado", "Bife suculento"],
+    carne: ["Frango assado", "Acém em pedaços"],
   },
   {
     name: "Menu do dia!",
     description:
       "Arroz soltinho, acompanhado de strogonoff cremoso, batata rústica crocante, batata palha dourada e uma salada tropical fresca e colorida.",
-    price: 30.9,
+    price: 29.99,
     img: "./assets/marmita-2.png",
     dias: [5], // Sexta
     feijao: [""],
-    carne: ["Strogonoff de frango", "Strogonoff de carne"],
+    carne: ["Strogonoff de carne"],
   },
   {
     name: "Menu do dia",
     description:
       "Arroz soltinho, servido com uma deliciosa feijoada caseira, acompanhada de couve refogada, farofa crocante e lâminas frescas de laranja.",
-    price: 30.9,
+    price: 29.99,
     img: "./assets/marmita-1.png",
     dias: [5], // Sexta
     feijao: ["Feijoada"],
-    carne: ["Carne seca", "Linguiça defumada"],
+    carne: [""],
   },
   {
     name: "Menu do dia",
     description:
       "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão caseiro, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
-    price: 30.9,
+    price: 29.99,
     img: "./assets/marmita-1.png",
     dias: [6], // Sábado
     feijao: ["Tropeiro", "Carioca"],
@@ -223,6 +223,7 @@ bebidasSemana.forEach((bebida) => {
 });
 
 // ------------------ EVENTOS DE ADIÇÃO AO CARRINHO ------------------
+// ------------------ EVENTOS DE ADIÇÃO AO CARRINHO ------------------
 [menuPratos, menuBebidas].forEach((container) => {
   container.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart-btn");
@@ -237,25 +238,44 @@ bebidasSemana.forEach((bebida) => {
       const pratoSelecionado = pratosDoDia[pratoIndex];
       selectedProduct = { name, price };
 
-      // Preenche selects dinamicamente
-      tipoFeijao.innerHTML =
-        '<option value="" disabled selected>Selecione um feijão</option>';
-      tipoCarne.innerHTML =
-        '<option value="" disabled selected>Selecione uma carne</option>';
+      // Resetar selects
+      tipoFeijao.innerHTML = "";
+      tipoCarne.innerHTML = "";
 
-      pratoSelecionado.feijao.forEach((f) => {
-        const opt = document.createElement("option");
-        opt.value = f;
-        opt.textContent = f;
-        tipoFeijao.appendChild(opt);
-      });
+      let hasFeijao = pratoSelecionado.feijao.some((f) => f.trim() !== "");
+      let hasCarne = pratoSelecionado.carne.some((c) => c.trim() !== "");
 
-      pratoSelecionado.carne.forEach((c) => {
-        const opt = document.createElement("option");
-        opt.value = c;
-        opt.textContent = c;
-        tipoCarne.appendChild(opt);
-      });
+      if (hasFeijao) {
+        tipoFeijao.innerHTML =
+          '<option value="" disabled selected>Selecione um feijão</option>';
+        tipoFeijao.disabled = false;
+        pratoSelecionado.feijao.forEach((f) => {
+          const opt = document.createElement("option");
+          opt.value = f;
+          opt.textContent = f;
+          tipoFeijao.appendChild(opt);
+        });
+        tipoFeijao.parentElement.classList.remove("hidden");
+      } else {
+        tipoFeijao.disabled = true;
+        tipoFeijao.parentElement.classList.add("hidden");
+      }
+
+      if (hasCarne) {
+        tipoCarne.innerHTML =
+          '<option value="" disabled selected>Selecione uma carne</option>';
+        tipoCarne.disabled = false;
+        pratoSelecionado.carne.forEach((c) => {
+          const opt = document.createElement("option");
+          opt.value = c;
+          opt.textContent = c;
+          tipoCarne.appendChild(opt);
+        });
+        tipoCarne.parentElement.classList.remove("hidden");
+      } else {
+        tipoCarne.disabled = true;
+        tipoCarne.parentElement.classList.add("hidden");
+      }
 
       feijaoWarn.classList.add("hidden");
       carneWarn.classList.add("hidden");
@@ -295,20 +315,33 @@ function fecharSelectModal() {
 
 selectCheckBtn.addEventListener("click", () => {
   let valid = true;
-  if (!tipoFeijao.value) {
+
+  if (!tipoFeijao.disabled && !tipoFeijao.value) {
     feijaoWarn.classList.remove("hidden");
     valid = false;
-  } else feijaoWarn.classList.add("hidden");
+  } else {
+    feijaoWarn.classList.add("hidden");
+  }
 
-  if (!tipoCarne.value) {
+  if (!tipoCarne.disabled && !tipoCarne.value) {
     carneWarn.classList.remove("hidden");
     valid = false;
-  } else carneWarn.classList.add("hidden");
+  } else {
+    carneWarn.classList.add("hidden");
+  }
 
   if (!valid) return;
 
-  const name = `${selectedProduct.name} (${tipoFeijao.value} + ${tipoCarne.value})`;
+  const feijaoSelecionado = tipoFeijao.disabled ? "" : tipoFeijao.value;
+  const carneSelecionada = tipoCarne.disabled ? "" : tipoCarne.value;
+
+  const nameParts = [selectedProduct.name];
+  if (feijaoSelecionado) nameParts.push(feijaoSelecionado);
+  if (carneSelecionada) nameParts.push(carneSelecionada);
+
+  const name = nameParts.join(" + ");
   Observação = obs.value;
+
   addToCart(name, selectedProduct.price);
 
   Toastify({
@@ -322,7 +355,6 @@ selectCheckBtn.addEventListener("click", () => {
 
   fecharSelectModal();
 });
-
 // ------------------ CARRINHO ------------------
 cartbtn.addEventListener("click", () => {
   cartModal.style.display = "flex";

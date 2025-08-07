@@ -85,6 +85,7 @@
     <!-- FIM MENU -->
 
     <!-- MODAL DE SELEÇÃO -->
+    <!-- MODAL DE SELEÇÃO -->
     <div
       class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] flex items-center justify-center hidden"
       id="select-modal"
@@ -92,29 +93,27 @@
       <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
         <h2 class="text-center font-bold text-2xl mb-2">Escolha as opções</h2>
 
-        <div class="flex flex-col">
+        <div id="feijao-wrapper" class="flex flex-col">
           <label for="tipo-feijao" class="font-bold">Tipo de feijão: </label>
-          <select name="tipo-feijao" id="tipo-feijao">
-            <option value="" disabled selected>Selecione um feijão</option>
-            <option value="Carioca">Carioca</option>
-            <option value="Tropeiro">Tropeiro</option>
-            <option value="Feijoada">Feijoada</option>
+          <select
+            name="tipo-feijao"
+            id="tipo-feijao"
+            class="border p-2 rounded"
+          >
+            <!-- Opções serão geradas dinamicamente -->
           </select>
           <p class="text-red-500 hidden" id="feijao-warn">
             Selecione um tipo de feijão!
           </p>
         </div>
 
-        <div class="flex flex-col mt-2">
+        <div id="carne-wrapper" class="flex flex-col mt-2">
           <label for="tipo-carne" class="font-bold">Carne: </label>
-          <select name="tipo-carne" id="tipo-carne">
-            <option value="" disabled selected>Selecione uma carne</option>
-            <option value="Boi">Boi</option>
-            <option value="Porco">Porco</option>
-            <option value="Frango">Frango</option>
+          <select name="tipo-carne" id="tipo-carne" class="border p-2 rounded">
+            <!-- Opções serão geradas dinamicamente -->
           </select>
           <p class="text-red-500 hidden" id="carne-warn">
-            Selecione um tipo de Carne!
+            Selecione um tipo de carne!
           </p>
         </div>
 
