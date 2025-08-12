@@ -4,8 +4,8 @@ const pratosSemana = [
     name: "Menu do dia",
     description:
       "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, quiabo suculento e salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
-    price: 29.99,
-    img: "./assets/marmita-1.png",
+    price: 28.9,
+    img: "./assets/seg.png",
     dias: [1], // Segunda
     feijao: ["Carioca"],
     carne: ["Frango ao molho", "Bife suculento"],
@@ -14,8 +14,8 @@ const pratosSemana = [
     name: "Menu do dia",
     description:
       "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia, ovo, e uma salada colorida com beterraba, alface, cenoura e tomate, servidos com costelinha de porco ou bife de carne.",
-    price: 29.99,
-    img: "./assets/marmita-2.png",
+    price: 28.9,
+    img: "./assets/terca.png",
     dias: [2], // Terça
     feijao: ["Carioca"],
     carne: ["Costelinha de porco", "Bife de carne"],
@@ -24,8 +24,8 @@ const pratosSemana = [
     name: "Menu do dia",
     description:
       "Arroz soltinho e feijão fresquinho, macarrão e um mix de legumes no vapor com brócolis, couve-flor, cenoura e vagem. Servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
-    price: 29.99,
-    img: "./assets/marmita-1.png",
+    price: 28.9,
+    img: "./assets/Quarta.png",
     dias: [3], // Quarta
     feijao: ["Carioca"],
     carne: ["Frango grelhado", "Costela com mandioca"],
@@ -34,7 +34,7 @@ const pratosSemana = [
     name: "Menu do dia + Morango do Amor Grátis!",
     description:
       "Arroz soltinho, feijão fresquinho, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
-    price: 29.99,
+    price: 28.9,
     img: "./assets/quinta-feira.png",
     dias: [4], // Quinta
     feijao: ["Carioca", "Tropeiro"],
@@ -44,8 +44,8 @@ const pratosSemana = [
     name: "Menu do dia!",
     description:
       "Arroz soltinho, acompanhado de strogonoff cremoso, batata rústica crocante, batata palha dourada e uma salada tropical fresca e colorida.",
-    price: 29.99,
-    img: "./assets/marmita-2.png",
+    price: 28.9,
+    img: "./assets/sexta-stro.png",
     dias: [5], // Sexta
     feijao: [""],
     carne: ["Strogonoff de carne"],
@@ -54,8 +54,8 @@ const pratosSemana = [
     name: "Menu do dia",
     description:
       "Arroz soltinho, servido com uma deliciosa feijoada caseira, acompanhada de couve refogada, farofa crocante e lâminas frescas de laranja.",
-    price: 29.99,
-    img: "./assets/marmita-1.png",
+    price: 28.9,
+    img: "./assets/sexta-feij.png",
     dias: [5], // Sexta
     feijao: ["Feijoada"],
     carne: [""],
@@ -63,9 +63,9 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão caseiro, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
-    price: 29.99,
-    img: "./assets/marmita-1.png",
+      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
+    price: 28.9,
+    img: "./assets/sabado.png",
     dias: [6], // Sábado
     feijao: ["Tropeiro", "Carioca"],
     carne: ["Churrasco"],
@@ -106,7 +106,7 @@ const bebidasSemana = [
     name: "Água mineral",
     description:
       "Água mineral — pureza e frescor naturais para hidratar seu corpo.",
-    price: 4.0,
+    price: 3.0,
     img: "./assets/agua.png",
   },
 ];
