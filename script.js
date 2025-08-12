@@ -5,7 +5,7 @@ const pratosSemana = [
     description:
       "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, quiabo suculento e salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
     price: 28.9,
-    img: "./assets/seg.png",
+    img: "./assets/segunda.png",
     dias: [1], // Segunda
     feijao: ["Carioca"],
     carne: ["Frango ao molho", "Bife suculento"],
@@ -33,7 +33,7 @@ const pratosSemana = [
   {
     name: "Menu do dia + Morango do Amor Grátis!",
     description:
-      "Arroz soltinho, feijão fresquinho, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
+      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
     price: 28.9,
     img: "./assets/quinta-feira.png",
     dias: [4], // Quinta
@@ -375,7 +375,7 @@ function addToCart(name, price) {
   updateCartModal();
 }
 
-taxaEntrega.value = 5;
+taxaEntrega.value = 4.99;
 
 function updateCartModal() {
   cartItemsContainer.innerHTML = "";
@@ -484,7 +484,7 @@ ${cartItems}
 
 *Observação: ${Observação}*
 
-*Taxa de entrega:${taxaEntrega.value.toFixed(2)}*
+*Taxa de entrega: ${taxaEntrega.value.toFixed(2)}*
 *Total: ${total.toFixed(2)}*
 *Forma de pagamento: ${metodoPagamento}*
 
