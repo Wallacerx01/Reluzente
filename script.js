@@ -125,6 +125,7 @@ const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const paymentWarn = document.getElementById("payment-warn");
 const spanItem = document.getElementById("date-span");
+const taxaEntrega = document.getElementById("taxaentrega");
 
 // Modal de seleção
 const selectModal = document.getElementById("select-modal");
@@ -222,7 +223,6 @@ bebidasSemana.forEach((bebida) => {
   menuBebidas.appendChild(item);
 });
 
-// ------------------ EVENTOS DE ADIÇÃO AO CARRINHO ------------------
 // ------------------ EVENTOS DE ADIÇÃO AO CARRINHO ------------------
 [menuPratos, menuBebidas].forEach((container) => {
   container.addEventListener("click", (e) => {
@@ -375,9 +375,14 @@ function addToCart(name, price) {
   updateCartModal();
 }
 
+taxaEntrega.value = 5;
+
 function updateCartModal() {
   cartItemsContainer.innerHTML = "";
-  total = 0;
+
+  const taxa = taxaEntrega.value;
+  taxaEntrega.innerHTML = taxa.toFixed(2);
+  total = taxa;
 
   cart.forEach((item) => {
     const cartItemElement = document.createElement("div");
@@ -479,6 +484,7 @@ ${cartItems}
 
 *Observação: ${Observação}*
 
+*Taxa de entrega:${taxaEntrega.value.toFixed(2)}*
 *Total: ${total.toFixed(2)}*
 *Forma de pagamento: ${metodoPagamento}*
 
