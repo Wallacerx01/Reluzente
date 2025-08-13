@@ -79,27 +79,27 @@ const bebidasSemana = [
     name: "Coca lata",
     description:
       "​​​​​Coca-Cola — o sabor icônico que complementa perfeitamente cada momento à mesa.",
-    price: 6.0,
+    price: 7.0,
     img: "./assets/refri-1.png",
   },
   {
     name: "Guaraná lata",
     description:
       "Guaraná Antarctica — o sabor brasileiro que refresca e anima seus momentos à mesa.",
-    price: 6.0,
+    price: 7.0,
     img: "./assets/refri-2.png",
   },
   {
     name: "Coca zero lata",
     description: "Coca-Cola Zero — o sabor autêntico da Coca, sem açúcar.",
-    price: 6.0,
+    price: 7.0,
     img: "./assets/cocazero.png",
   },
   {
     name: "La fruit",
     description:
       "La Fruit — a combinação perfeita de frutas naturais e frescor.",
-    price: 6.0,
+    price: 7.0,
     img: "./assets/lafruit.png",
   },
   {
