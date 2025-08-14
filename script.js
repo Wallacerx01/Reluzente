@@ -96,11 +96,18 @@ const bebidasSemana = [
     img: "./assets/cocazero.png",
   },
   {
-    name: "La fruit",
+    name: "La fruit - Pêssego",
     description:
       "La Fruit — a combinação perfeita de frutas naturais e frescor.",
     price: 7.0,
     img: "./assets/lafruit.png",
+  },
+  {
+    name: "La fruit - Uva",
+    description:
+      "La Fruit — a combinação perfeita de frutas naturais e frescor.",
+    price: 7.0,
+    img: "./assets/lafruit-uva.png",
   },
   {
     name: "Água mineral",
