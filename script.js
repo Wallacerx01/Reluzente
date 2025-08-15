@@ -492,8 +492,8 @@ ${cartItems}
 *Observação: ${Observação}*
 
 *Taxa de entrega: ${taxaEntrega.value.toFixed(2)}*
-*Total: ${total.toFixed(2)}*
 *Forma de pagamento: ${metodoPagamento}*
+*Total: ${total.toFixed(2)}*
 
 *Endereço: ${addressInput.value}*
 `;
