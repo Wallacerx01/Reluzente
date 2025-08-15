@@ -31,7 +31,7 @@ const pratosSemana = [
     carne: ["Frango grelhado", "Costela com mandioca"],
   },
   {
-    name: "Menu do dia + Morango do Amor Grátis!",
+    name: "Menu do dia!",
     description:
       "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
     price: 28.9,
@@ -48,7 +48,7 @@ const pratosSemana = [
     img: "./assets/sexta-stro.png",
     dias: [5], // Sexta
     feijao: [""],
-    carne: ["Strogonoff de carne"],
+    carne: ["Strogonoff de frango"],
   },
   {
     name: "Menu do dia",
