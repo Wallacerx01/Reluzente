@@ -63,7 +63,7 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
+      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarronese, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
     price: 28.9,
     img: "./assets/sabado.png",
     dias: [6], // Sábado
