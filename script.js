@@ -3,7 +3,7 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, quiabo suculento e salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
+      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
     price: 28.9,
     img: "./assets/segunda.png",
     dias: [1], // Segunda
