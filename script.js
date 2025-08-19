@@ -23,7 +23,7 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão e um mix de legumes no vapor com brócolis, couve-flor, cenoura e vagem. Servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
+      "Arroz soltinho e feijão fresquinho, macarrão, banana frita, farofa Servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
     price: 28.9,
     img: "./assets/Quarta.png",
     dias: [3], // Quarta
