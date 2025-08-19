@@ -15,7 +15,7 @@ const pratosSemana = [
     description:
       "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia, e uma salada no vapor, brócolis, couve-flor, cenoura e batata, servidos com costelinha de porco ou carne de panela.",
     price: 28.9,
-    img: "./assets/terca.png",
+    img: "./assets/terca1.png",
     dias: [2], // Terça
     feijao: ["Carioca"],
     carne: ["Costelinha de porco", "Bife de carne"],
