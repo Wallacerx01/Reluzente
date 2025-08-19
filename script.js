@@ -13,7 +13,7 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia, ovo, e uma salada colorida com beterraba, alface, cenoura e tomate, servidos com costelinha de porco ou bife de carne.",
+      "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia, e uma salada no vapor, brócolis, couve-flor, cenoura e batata, servidos com costelinha de porco ou carne de panela.",
     price: 28.9,
     img: "./assets/terca.png",
     dias: [2], // Terça
