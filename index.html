@@ -64,7 +64,7 @@
       <!-- PRATOS DO DIA -->
       <main
         id="menu"
-        class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-20 mx-auto max-w-7xl px-2 mb-16"
+        class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-20 mx-auto max-w-7xl px-2 mb-5"
       >
         <!-- Conteúdo gerado dinamicamente pelo JS -->
       </main>
@@ -139,16 +139,55 @@
 
     <!-- MODAL CARRINHO -->
     <div
-      class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden"
+      class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] flex items-center justify-center hidden"
       id="cart-modal"
     >
       <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
-        <h2 class="text-center font-bold text-2xl mb-2">Seu carrinho</h2>
+        <h2 class="text-center font-bold text-2xl mb-2">Carrinho</h2>
 
         <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
 
-        <p class="mt-4">Taxa de entrega: <span id="taxaentrega">0.00</span></p>
+        <div class="flex gap-2 my-1 input-radio">
+          <input
+            type="checkbox"
+            id="retirar-local"
+            name="retirar-local"
+            value="true"
+          />
+          <label for="retirar-local">Retirar no local</label>
+        </div>
+
+        <p class="mt-4">Taxa de entrega: <span id="taxa-entrega">0.00</span></p>
         <p class="font-bold mt-2">Total: <span id="cart-total">0.00</span></p>
+
+        <div class="flex items-center justify-between mt-5 w-full">
+          <button id="close-modal-btn">Fechar</button>
+          <button
+            id="next-btn"
+            class="bg-green-500 text-white px-4 py-1 rounded"
+          >
+            Continuar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CONFIRMAR PEDIDO-->
+    <div
+      class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] flex items-center justify-center hidden"
+      id="conf-cart-modal"
+    >
+      <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+        <h2 class="text-center font-bold text-2xl mb-2">Confirmar pedido</h2>
+
+        <p class="font-bold mt-4">Nome:</p>
+        <input
+          type="text"
+          placeholder="Digite seu nome..."
+          id="name"
+          class="w-full border-2 p-1 rounded my-1"
+        />
+        <p class="text-red-500 hidden" id="name-warn">Digite seu nome!</p>
 
         <p class="font-bold mt-4">Endereço de entrega:</p>
         <input
@@ -179,7 +218,7 @@
         </p>
 
         <div class="flex items-center justify-between mt-5 w-full">
-          <button id="close-modal-btn">Fechar</button>
+          <button id="prev-conf">Voltar</button>
           <button
             id="checkout-btn"
             class="bg-green-500 text-white px-4 py-1 rounded"
@@ -190,6 +229,8 @@
       </div>
     </div>
 
+    <!-- MODAL CONFIRMAR PEDIDO -->
+
     <!-- BOTÃO CARRINHO -->
     <footer
       class="w-full bg-green-600 py-3 fixed bottom-0 z-40 flex items-center justify-center"
@@ -198,7 +239,7 @@
         class="flex items-center gap-2 text-white font-bold"
         id="cart-btn"
       >
-        (<span id="cart-count">0</span>) Meu carrinho
+        (<span id="cart-count">0</span>) Carrinho
         <i class="fa fa-cart-plus text-lg text-white"></i>
       </button>
     </footer>

@@ -3,8 +3,8 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, quiabo suculento e salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
-    price: 28.9,
+      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
+    price: 24.99,
     img: "./assets/segunda.png",
     dias: [1], // Segunda
     feijao: ["Carioca"],
@@ -13,17 +13,17 @@ const pratosSemana = [
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia, ovo, e uma salada colorida com beterraba, alface, cenoura e tomate, servidos com costelinha de porco ou bife de carne.",
-    price: 28.9,
+      "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia e uma salada no vapor, brócolis, couve-flor, cenoura e batata, servidos com costelinha de porco ou carne de panela.",
+    price: 24.99,
     img: "./assets/terca.png",
     dias: [2], // Terça
     feijao: ["Carioca"],
-    carne: ["Costelinha de porco", "Bife de carne"],
+    carne: ["Costelinha de porco", "Carne de panela"],
   },
   {
     name: "Menu do dia",
     description:
-      "Arroz soltinho e feijão fresquinho, macarrão e um mix de legumes no vapor com brócolis, couve-flor, cenoura e vagem. Servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
+      "Arroz soltinho e feijão fresquinho, macarrão, banana frita, farofa servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
     price: 28.9,
     img: "./assets/Quarta.png",
     dias: [3], // Quarta
@@ -31,41 +31,61 @@ const pratosSemana = [
     carne: ["Frango grelhado", "Costela com mandioca"],
   },
   {
-    name: "Menu do dia + Morango do Amor Grátis!",
+    name: "Menu do dia",
     description:
       "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
-    price: 28.9,
+    price: 24.99,
     img: "./assets/quinta-feira.png",
     dias: [4], // Quinta
     feijao: ["Carioca", "Tropeiro"],
     carne: ["Frango assado", "Acém em pedaços"],
   },
   {
-    name: "Menu do dia!",
+    name: "Menu do dia",
     description:
       "Arroz soltinho, acompanhado de strogonoff cremoso, batata rústica crocante, batata palha dourada e uma salada tropical fresca e colorida.",
-    price: 28.9,
+    price: 24.99,
     img: "./assets/sexta-stro.png",
     dias: [5], // Sexta
     feijao: [""],
-    carne: ["Strogonoff de carne"],
+    carne: ["Strogonoff de frango"],
   },
   {
     name: "Menu do dia",
     description:
       "Arroz soltinho, servido com uma deliciosa feijoada caseira, acompanhada de couve refogada, farofa crocante e lâminas frescas de laranja.",
-    price: 28.9,
+    price: 24.99,
     img: "./assets/sexta-feij.png",
     dias: [5], // Sexta
     feijao: ["Feijoada"],
     carne: [""],
   },
   {
+    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
+    description:
+      "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
+    price: 30.99,
+    img: "./assets/combo.png",
+    dias: [5], // Sexta
+    feijao: ["Feijoada", "Strogonoff de frango"],
+    carne: [""],
+  },
+  {
     name: "Menu do dia",
     description:
-      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
-    price: 28.9,
+      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarronese, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
+    price: 24.99,
     img: "./assets/sabado.png",
+    dias: [6], // Sábado
+    feijao: ["Tropeiro", "Carioca"],
+    carne: ["Churrasco"],
+  },
+  {
+    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
+    description:
+      "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
+    price: 30.99,
+    img: "./assets/combo.png",
     dias: [6], // Sábado
     feijao: ["Tropeiro", "Carioca"],
     carne: ["Churrasco"],
@@ -131,8 +151,14 @@ const cartCounter = document.getElementById("cart-count");
 const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const paymentWarn = document.getElementById("payment-warn");
+const nameWarn = document.getElementById("name-warn");
 const spanItem = document.getElementById("date-span");
-const taxaEntrega = document.getElementById("taxaentrega");
+const taxaEntrega = document.getElementById("taxa-entrega");
+const nomeInput = document.getElementById("name");
+const retirarLocal = document.getElementById("retirar-local");
+const confCartModal = document.getElementById("conf-cart-modal");
+const nextBtn = document.getElementById("next-btn");
+const prevConfBtn = document.getElementById("prev-conf");
 
 // Modal de seleção
 const selectModal = document.getElementById("select-modal");
@@ -148,6 +174,7 @@ let cart = [];
 let total = 0;
 let selectedProduct = null;
 let Observação;
+let pedidoAtual = 0;
 
 // ------------------ MONTAR PRATOS DO DIA ------------------
 const hoje = new Date().getDay(); // 0=Dom
@@ -240,7 +267,10 @@ bebidasSemana.forEach((bebida) => {
     const price = parseFloat(btn.getAttribute("data-price"));
 
     // Se for prato do dia com modal
-    if (name.includes("Menu do dia")) {
+    if (
+      name.includes("Menu do dia") ||
+      name.includes("Menu do Dia + Bebida 350ml (suco ou refri)")
+    ) {
       const pratoIndex = btn.getAttribute("data-index");
       const pratoSelecionado = pratosDoDia[pratoIndex];
       selectedProduct = { name, price };
@@ -370,10 +400,30 @@ cartbtn.addEventListener("click", () => {
 cartModal.addEventListener("click", (e) => {
   if (e.target === cartModal) cartModal.style.display = "none";
 });
+nextBtn.addEventListener("click", () => {
+  if (cart.length === 0) {
+    Toastify({
+      text: "Carrinho vazio!",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      style: { background: "#ef4444" },
+    }).showToast();
+    return;
+  }
+  cartModal.style.display = "none";
+  confCartModal.style.display = "flex";
+});
 closeModalBtn.addEventListener(
   "click",
   () => (cartModal.style.display = "none")
 );
+
+// -------------CONFIRMAR PEDIDO------------------
+prevConfBtn.addEventListener("click", () => {
+  confCartModal.style.display = "none";
+  cartModal.style.display = "flex";
+});
 
 function addToCart(name, price) {
   const existingItem = cart.find((item) => item.name === name);
@@ -382,12 +432,29 @@ function addToCart(name, price) {
   updateCartModal();
 }
 
-taxaEntrega.value = 4.99;
+// TAXA DE ENTREGA
+function atualizarTaxa() {
+  let taxa = 0;
+  if (retirarLocal.checked) {
+    taxa = 0.0; // RETIRADO NO LOCAL
+  } else {
+    taxa = 4.99; // ENTREGA
+  }
+
+  return taxa;
+}
+
+// Executa quando o usuário marcar/desmarcar
+retirarLocal.addEventListener("change", updateCartModal);
+
+// Já atualiza na primeira vez (caso a página carregue com valor diferente)
+updateCartModal();
 
 function updateCartModal() {
+  const taxa = atualizarTaxa();
+
   cartItemsContainer.innerHTML = "";
 
-  const taxa = taxaEntrega.value;
   taxaEntrega.innerHTML = taxa.toFixed(2);
   total = taxa;
 
@@ -437,6 +504,13 @@ function removeItemCart(name) {
 }
 
 // ------------------ FINALIZAR PEDIDO ------------------
+nomeInput.addEventListener("input", (e) => {
+  if (e.target.value !== "") {
+    nomeInput.classList.remove("border-red-500");
+    nameWarn.classList.add("hidden");
+  }
+});
+
 addressInput.addEventListener("input", (e) => {
   if (e.target.value !== "") {
     addressInput.classList.remove("border-red-500");
@@ -450,7 +524,17 @@ document
     radio.addEventListener("change", () => paymentWarn.classList.add("hidden"));
   });
 
+function numeroDoPedido() {
+  pedidoAtual++;
+  return pedidoAtual;
+}
+
+pedidoAtual = numeroDoPedido();
+
 checkoutBtn.addEventListener("click", () => {
+  const taxa = atualizarTaxa();
+  const totalCheckout = total;
+
   const isOpen = checkRestauranteOpen();
   if (!isOpen) {
     Toastify({
@@ -464,6 +548,13 @@ checkoutBtn.addEventListener("click", () => {
   }
 
   if (cart.length === 0) return;
+
+  if (nomeInput.value === "") {
+    nameWarn.classList.remove("hidden");
+    nomeInput.classList.add("border-red-500");
+    return;
+  }
+
   if (addressInput.value === "") {
     addressWarn.classList.remove("hidden");
     addressInput.classList.add("border-red-500");
@@ -479,23 +570,30 @@ checkoutBtn.addEventListener("click", () => {
   }
 
   const metodoPagamento = selectedRadio.value;
+  const obsText =
+    !Observação || Observação.trim() === "" ? "..." : Observação.trim();
+
   const cartItems = cart
     .map(
       (item) =>
         `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}`
     )
     .join("\n");
+  let fullMessage = "";
+  fullMessage = `
 
-  const fullMessage = `
 ${cartItems}
 
-*Observação: ${Observação}*
+*Nome:* ${nomeInput.value}
 
-*Taxa de entrega: ${taxaEntrega.value.toFixed(2)}*
-*Total: ${total.toFixed(2)}*
-*Forma de pagamento: ${metodoPagamento}*
+*Observação:* ${obsText}
 
-*Endereço: ${addressInput.value}*
+*Forma de pagamento:* ${metodoPagamento}
+
+*Taxa de entrega:* ${taxa.toFixed(2)}
+*Total:* ${totalCheckout.toFixed(2)}
+
+*Endereço:* ${addressInput.value}
 `;
 
   const message = encodeURIComponent(fullMessage);
@@ -505,6 +603,7 @@ ${cartItems}
   cart = [];
   updateCartModal();
   addressInput.value = "";
+  confCartModal.style.display = "none";
 });
 
 // ------------------ HORÁRIO RESTAURANTE ------------------
