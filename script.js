@@ -614,7 +614,7 @@ function checkRestauranteOpen() {
 
   if (diaSemana === 0) return false; // fechado domingo
 
-  const abre = hora > 6 || (hora === 10 && minuto >= 0); // 10:00
+  const abre = hora > 10 || (hora === 10 && minuto >= 0); // 10:00
   const fecha = hora < 14 || (hora === 14 && minuto < 30); // 14:30
 
   return abre && fecha;
