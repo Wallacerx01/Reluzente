@@ -41,6 +41,16 @@ const pratosSemana = [
     carne: ["Frango assado", "Acém em pedaços"],
   },
   {
+    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
+    description:
+      "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
+    price: 30.99,
+    img: "./assets/combo.png",
+    dias: [5], // Sexta
+    feijao: ["Feijoada", "Strogonoff de frango"],
+    carne: [""],
+  },
+  {
     name: "Menu do dia",
     description:
       "Arroz soltinho, acompanhado de strogonoff cremoso, batata rústica crocante, batata palha dourada e uma salada tropical fresca e colorida.",
@@ -66,9 +76,9 @@ const pratosSemana = [
       "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
     price: 30.99,
     img: "./assets/combo.png",
-    dias: [5], // Sexta
-    feijao: ["Feijoada", "Strogonoff de frango"],
-    carne: [""],
+    dias: [6], // Sábado
+    feijao: ["Tropeiro", "Carioca"],
+    carne: ["Churrasco"],
   },
   {
     name: "Menu do dia",
@@ -76,16 +86,6 @@ const pratosSemana = [
       "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarronese, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
     price: 24.99,
     img: "./assets/sabado.png",
-    dias: [6], // Sábado
-    feijao: ["Tropeiro", "Carioca"],
-    carne: ["Churrasco"],
-  },
-  {
-    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
-    description:
-      "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
-    price: 30.99,
-    img: "./assets/combo.png",
     dias: [6], // Sábado
     feijao: ["Tropeiro", "Carioca"],
     carne: ["Churrasco"],
