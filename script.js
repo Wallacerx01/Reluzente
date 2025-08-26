@@ -174,7 +174,6 @@ let cart = [];
 let total = 0;
 let selectedProduct = null;
 let Observação;
-let pedidoAtual = 0;
 
 // ------------------ MONTAR PRATOS DO DIA ------------------
 const hoje = new Date().getDay(); // 0=Dom
@@ -523,12 +522,12 @@ document
     radio.addEventListener("change", () => paymentWarn.classList.add("hidden"));
   });
 
-function numeroDoPedido() {
-  pedidoAtual++;
-  return pedidoAtual;
-}
+const supabase = window.supabase.createClient(
+  "https://obcjoccntxulnbsdhehk.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iY2pvY2NudHh1bG5ic2RoZWhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxNTAxOTQsImV4cCI6MjA3MTcyNjE5NH0.eZRu8colIYu925tZEp9p__5GgJS14T1qsbqt3mjTjIQ"
+);
 
-pedidoAtual = numeroDoPedido();
+console.log("Conectado ao Supabase!", supabase);
 
 checkoutBtn.addEventListener("click", () => {
   const taxa = atualizarTaxa();
@@ -570,7 +569,7 @@ checkoutBtn.addEventListener("click", () => {
 
   const metodoPagamento = selectedRadio.value;
   const obsText =
-    !Observação || Observação.trim() === "" ? "..." : Observação.trim();
+    !Observação || Observação.trim() === "" ? "" : Observação.trim();
 
   const cartItems = cart
     .map(
@@ -578,8 +577,54 @@ checkoutBtn.addEventListener("click", () => {
         `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}`
     )
     .join("\n");
-  let fullMessage = "";
-  fullMessage = `
+  async function gerarNumeroPedido() {
+    // pega o maior número já salvo
+    const { data, error } = await supabase
+      .from("pedidos")
+      .select("numero")
+      .order("numero", { ascending: false })
+      .limit(1);
+
+    if (error) {
+      console.error("Erro ao buscar último número do pedido:", error);
+      return 1; // fallback
+    }
+
+    const ultimo = data[0]?.numero || 0;
+    return ultimo + 1;
+  }
+
+  async function salvarPedido() {
+    const pedidoAtual = await gerarNumeroPedido();
+
+    const { data, error } = await supabase.from("pedidos").insert([
+      {
+        numero: pedidoAtual,
+        cliente: nomeInput.value,
+        itens: cartItems,
+        total: totalCheckout,
+        pagamento: metodoPagamento,
+        endereco: addressInput.value,
+        observacao: obsText,
+        taxa: taxa,
+      },
+    ]);
+
+    if (error) {
+      console.error("❌ Erro ao salvar pedido:", error.message);
+      Toastify({
+        text: "Erro ao salvar pedido!",
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        style: { background: "#ef4444" },
+      }).showToast();
+      return;
+    }
+
+    let fullMessage = "";
+    fullMessage = `
+*Pedido:* ${pedidoAtual}
 
 ${cartItems}
 
@@ -595,14 +640,20 @@ ${cartItems}
 *Endereço:* ${addressInput.value}
 `;
 
-  const message = encodeURIComponent(fullMessage);
-  const phone = "6298555335";
-  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    const message = encodeURIComponent(fullMessage);
+    const phone = "6298555335";
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
-  cart = [];
-  updateCartModal();
-  addressInput.value = "";
-  confCartModal.style.display = "none";
+    cart = [];
+    updateCartModal();
+    addressInput.value = "";
+    confCartModal.style.display = "none";
+
+    console.log("✅ Pedido salvo com sucesso!", data);
+  }
+
+  // chama a função
+  salvarPedido();
 });
 
 // ------------------ HORÁRIO RESTAURANTE ------------------
