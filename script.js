@@ -630,14 +630,15 @@ ${cartItems}
 
 *Nome:* ${nomeInput.value}
 
-*Observação:* ${obsText}
-
 *Forma de pagamento:* ${metodoPagamento}
 
 *Taxa de entrega:* ${taxa.toFixed(2)}
 *Total:* ${totalCheckout.toFixed(2)}
 
-*Endereço:* ${addressInput.value}
+${Observação ? `*Observação:* ${Observação}` : ""}
+
+${addressInput.value ? `*Endereço:* ${addressInput.value}` : ""}
+
 `;
 
     const message = encodeURIComponent(fullMessage);
