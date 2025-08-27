@@ -141,6 +141,7 @@ const retirarLocal = document.getElementById("retirar-local");
 const confCartModal = document.getElementById("conf-cart-modal");
 const nextBtn = document.getElementById("next-btn");
 const prevConfBtn = document.getElementById("prev-conf");
+const textAddress = document.getElementById("text-address");
 
 // Modal de seleção
 const selectModal = document.getElementById("select-modal");
@@ -432,6 +433,15 @@ updateCartModal();
 
 function updateCartModal() {
   const taxa = atualizarTaxa();
+
+  if (taxa === 0) {
+    addressInput.classList.add("hidden");
+    textAddress.classList.add("hidden");
+    // Também é bom limpar a validação anterior, se houver
+    addressInput.classList.remove("border-red-500");
+    addressWarn.classList.add("hidden");
+    addressInput.value = "Retirar no local";
+  }
 
   cartItemsContainer.innerHTML = "";
 
