@@ -24,7 +24,7 @@ const pratosSemana = [
     name: "Menu do dia",
     description:
       "Arroz soltinho e feijão fresquinho, macarrão, banana frita, farofa servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
-    price: 28.9,
+    price: 24.99,
     img: "./assets/Quarta.png",
     dias: [3], // Quarta
     feijao: ["Carioca"],
