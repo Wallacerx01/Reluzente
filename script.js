@@ -40,16 +40,7 @@ const pratosSemana = [
     feijao: ["Carioca", "Tropeiro"],
     carne: ["Frango assado", "Acém em pedaços"],
   },
-  {
-    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
-    description:
-      "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
-    price: 30.99,
-    img: "./assets/combo.png",
-    dias: [5], // Sexta
-    feijao: ["Feijoada", "Strogonoff de frango"],
-    carne: [""],
-  },
+
   {
     name: "Menu do dia",
     description:
@@ -70,16 +61,7 @@ const pratosSemana = [
     feijao: ["Feijoada"],
     carne: [""],
   },
-  {
-    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
-    description:
-      "Arroz soltinho com opção de prato especial do dia, acompanhado de guarnições saborosas e uma bebida 350ml à sua escolha.",
-    price: 30.99,
-    img: "./assets/combo.png",
-    dias: [6], // Sábado
-    feijao: ["Tropeiro", "Carioca"],
-    carne: ["Churrasco"],
-  },
+
   {
     name: "Menu do dia",
     description:
@@ -643,7 +625,11 @@ ${addressInput.value ? `*Endereço:* ${addressInput.value}` : ""}
 
     const message = encodeURIComponent(fullMessage);
     const phone = "556298555335";
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      window.location.href = `whatsapp://send?phone=${phone}&text=${message}`;
+    } else {
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    }
 
     cart = [];
     updateCartModal();
