@@ -641,7 +641,7 @@ ${cartItems}
 `;
 
     const message = encodeURIComponent(fullMessage);
-    const phone = "6298555335";
+    const phone = "556298555335";
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
     cart = [];
