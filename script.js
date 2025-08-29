@@ -40,6 +40,16 @@ const pratosSemana = [
     feijao: ["Carioca", "Tropeiro"],
     carne: ["Frango assado", "Acém em pedaços"],
   },
+   {
+    name: "Menu do dia + bebida 350ml",
+    description:
+      "Refeição completa, saborosa e com aquele gostinho de comida caseira que dá vontade de repetir.",
+    price: 30.99,
+    img: "./assets/combo.png",
+    dias: [5], // Sexta
+    feijao: [""],
+    carne: ["Strogonoff de frango", "Feijoada"],
+  },
 
   {
     name: "Menu do dia",
@@ -60,6 +70,16 @@ const pratosSemana = [
     dias: [5], // Sexta
     feijao: ["Feijoada"],
     carne: [""],
+  },
+  {
+    name: "Menu do dia + bebida 350ml",
+    description:
+      "Refeição completa, saborosa e com aquele gostinho de comida caseira que dá vontade de repetir.",
+    price: 30.99,
+    img: "./assets/combo.png",
+    dias: [6], // Sexta
+    feijao: ["Tropeiro", "Carioca"],
+    carne: ["Churrasco"],
   },
 
   {
