@@ -41,7 +41,7 @@ const pratosSemana = [
     carne: ["Frango assado", "Acém em pedaços"],
   },
    {
-    name: "Menu do dia + bebida 350ml",
+    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
     description:
       "Refeição completa, saborosa e com aquele gostinho de comida caseira que dá vontade de repetir.",
     price: 30.99,
@@ -72,7 +72,7 @@ const pratosSemana = [
     carne: [""],
   },
   {
-    name: "Menu do dia + bebida 350ml",
+    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
     description:
       "Refeição completa, saborosa e com aquele gostinho de comida caseira que dá vontade de repetir.",
     price: 30.99,
