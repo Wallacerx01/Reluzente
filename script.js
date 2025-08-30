@@ -1,145 +1,3 @@
-// ------------------ CONFIGURAÇÃO DE PRATOS ------------------
-const pratosSemana = [
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho e feijão fresquinho, macarrão, purê de batata cremoso, milho macio, salada fresca de repolho com tomate, servidos com frango ao molho ou bife suculento.",
-    price: 24.99,
-    img: "./assets/segunda.png",
-    dias: [1], // Segunda
-    feijao: ["Carioca"],
-    carne: ["Frango ao molho", "Bife suculento"],
-  },
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho e feijão fresquinho, macarrão, mandioca macia e uma salada no vapor, brócolis, couve-flor, cenoura e batata, servidos com costelinha de porco ou carne de panela.",
-    price: 24.99,
-    img: "./assets/terca.png",
-    dias: [2], // Terça
-    feijao: ["Carioca"],
-    carne: ["Costelinha de porco", "Carne de panela"],
-  },
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho e feijão fresquinho, macarrão, banana frita, farofa servido com salada fresca de alface e tomate e filé de frango grelhado ou costela com mandioca.",
-    price: 24.99,
-    img: "./assets/Quarta.png",
-    dias: [3], // Quarta
-    feijao: ["Carioca"],
-    carne: ["Frango grelhado", "Costela com mandioca"],
-  },
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarrão, maionese cremosa e salada fresca de alface, tomate e repolho, acompanhados de frango assado ou acém em pedaços.",
-    price: 24.99,
-    img: "./assets/quinta-feira.png",
-    dias: [4], // Quinta
-    feijao: ["Carioca", "Tropeiro"],
-    carne: ["Frango assado", "Acém em pedaços"],
-  },
-   {
-    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
-    description:
-      "Refeição completa, saborosa e com aquele gostinho de comida caseira que dá vontade de repetir.",
-    price: 30.99,
-    img: "./assets/combo.png",
-    dias: [5], // Sexta
-    feijao: [""],
-    carne: ["Strogonoff de frango", "Feijoada"],
-  },
-
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho, acompanhado de strogonoff cremoso, batata rústica crocante, batata palha dourada e uma salada tropical fresca e colorida.",
-    price: 24.99,
-    img: "./assets/sexta-stro.png",
-    dias: [5], // Sexta
-    feijao: [""],
-    carne: ["Strogonoff de frango"],
-  },
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho, servido com uma deliciosa feijoada caseira, acompanhada de couve refogada, farofa crocante e lâminas frescas de laranja.",
-    price: 24.99,
-    img: "./assets/sexta-feij.png",
-    dias: [5], // Sexta
-    feijao: ["Feijoada"],
-    carne: [""],
-  },
-  {
-    name: "Menu do Dia + Bebida 350ml (suco ou refri)",
-    description:
-      "Refeição completa, saborosa e com aquele gostinho de comida caseira que dá vontade de repetir.",
-    price: 30.99,
-    img: "./assets/combo.png",
-    dias: [6], // Sexta
-    feijao: ["Tropeiro", "Carioca"],
-    carne: ["Churrasco"],
-  },
-
-  {
-    name: "Menu do dia",
-    description:
-      "Arroz soltinho, acompanhado de feijão tropeiro ou caldo tradicional, macarronese, mandioca cozida, vinagrete fresco e um saboroso churrasco suculento.",
-    price: 24.99,
-    img: "./assets/sabado.png",
-    dias: [6], // Sábado
-    feijao: ["Tropeiro", "Carioca"],
-    carne: ["Churrasco"],
-  },
-];
-
-// ------------------ CONFIGURAÇÃO DE BEBIDAS ------------------
-
-const bebidasSemana = [
-  {
-    name: "Coca lata",
-    description:
-      "​​​​​Coca-Cola — o sabor icônico que complementa perfeitamente cada momento à mesa.",
-    price: 7.0,
-    img: "./assets/refri-1.png",
-  },
-  {
-    name: "Guaraná lata",
-    description:
-      "Guaraná Antarctica — o sabor brasileiro que refresca e anima seus momentos à mesa.",
-    price: 7.0,
-    img: "./assets/refri-2.png",
-  },
-  {
-    name: "Coca zero lata",
-    description: "Coca-Cola Zero — o sabor autêntico da Coca, sem açúcar.",
-    price: 7.0,
-    img: "./assets/cocazero.png",
-  },
-  {
-    name: "La fruit - Pêssego",
-    description:
-      "La Fruit — a combinação perfeita de frutas naturais e frescor.",
-    price: 7.0,
-    img: "./assets/lafruit.png",
-  },
-  {
-    name: "La fruit - Uva",
-    description:
-      "La Fruit — a combinação perfeita de frutas naturais e frescor.",
-    price: 7.0,
-    img: "./assets/lafruit-uva.png",
-  },
-  {
-    name: "Água mineral",
-    description:
-      "Água mineral — pureza e frescor naturais para hidratar seu corpo.",
-    price: 3.0,
-    img: "./assets/agua.png",
-  },
-];
-
 // ------------------ ELEMENTOS DOM ------------------
 const menuPratos = document.getElementById("menu");
 const menuBebidas = document.getElementById("menu-bebidas");
@@ -154,7 +12,6 @@ const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const paymentWarn = document.getElementById("payment-warn");
 const nameWarn = document.getElementById("name-warn");
-const spanItem = document.getElementById("date-span");
 const taxaEntrega = document.getElementById("taxa-entrega");
 const nomeInput = document.getElementById("name");
 const retirarLocal = document.getElementById("retirar-local");
@@ -162,6 +19,7 @@ const confCartModal = document.getElementById("conf-cart-modal");
 const nextBtn = document.getElementById("next-btn");
 const prevConfBtn = document.getElementById("prev-conf");
 const textAddress = document.getElementById("text-address");
+const spanItem = document.getElementById("date-span");
 
 // Modal de seleção
 const selectModal = document.getElementById("select-modal");
@@ -173,93 +31,143 @@ const obs = document.getElementById("obs");
 const feijaoWarn = document.getElementById("feijao-warn");
 const carneWarn = document.getElementById("carne-warn");
 
+// ------------------ VARIÁVEIS ------------------
 let cart = [];
 let total = 0;
 let selectedProduct = null;
-let Observação;
+let Observação = "";
+let pratosDoDia = [];
+let bebidasSemana = [];
 
-// ------------------ MONTAR PRATOS DO DIA ------------------
-const hoje = new Date().getDay(); // 0=Dom
-menuPratos.innerHTML = "";
+// ------------------ SUPABASE ------------------
+const supabase = window.supabase.createClient(
+  "https://obcjoccntxulnbsdhehk.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iY2pvY2NudHh1bG5ic2RoZWhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxNTAxOTQsImV4cCI6MjA3MTcyNjE5NH0.eZRu8colIYu925tZEp9p__5GgJS14T1qsbqt3mjTjIQ"
+);
 
-const pratosDoDia = pratosSemana.filter((prato) => prato.dias.includes(hoje));
+// ------------------ HORÁRIO ------------------
+function checkRestauranteOpen() {
+  const data = new Date();
+  const hora = data.getHours();
+  const minuto = data.getMinutes();
+  const diaSemana = data.getDay(); // 0 = domingo
 
-pratosDoDia.forEach((prato, index) => {
-  const item = document.createElement("div");
-  item.classList.add(
-    "flex",
-    "items-center",
-    "justify-start",
-    "gap-4",
-    "p-4",
-    "rounded-lg",
-    "shadow-md",
-    "bg-white"
-  );
-  item.innerHTML = `
-    <img src="${prato.img}" alt="${
-    prato.name
-  }" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300" />
-    <div>
-      <p class="font-bold">${prato.name}</p>
-      <p class="text-sm">${prato.description}</p>
-      <div class="flex items-center gap-2 justify-between mt-3">
-        <p class="font-bold text-lg">R$ ${prato.price.toFixed(2)}</p>
-        <button class="bg-gray-900 px-5 rounded add-to-cart-btn hover:scale-105 duration-200"
-          data-index="${index}" data-name="${prato.name}" data-price="${
-    prato.price
-  }">
-          <i class="fa fa-cart-plus text-lg text-white"></i>
-        </button>
+  if (diaSemana === 0) return false; // fechado domingo
+
+  const inicio = 10 * 60; // 10:00 abri
+  const fim = 14 * 60 + 30; // 14:30 fecha
+  const agora = hora * 60 + minuto;
+
+  return agora >= inicio && agora <= fim;
+}
+
+const isOpen = checkRestauranteOpen();
+if (isOpen) {
+  spanItem.classList.remove("bg-red-500");
+  spanItem.classList.add("bg-green-600");
+} else {
+  spanItem.classList.remove("bg-green-600");
+  spanItem.classList.add("bg-red-500");
+}
+
+// ------------------ FUNÇÕES SUPABASE ------------------
+async function fetchPratos() {
+  const { data, error } = await supabase.from("pratos").select("*");
+  if (error) {
+    console.error("Erro ao buscar pratos:", error);
+    return [];
+  }
+  return data;
+}
+
+async function fetchBebidas() {
+  const { data, error } = await supabase.from("bebidas").select("*");
+  if (error) {
+    console.error("Erro ao buscar bebidas:", error);
+    return [];
+  }
+  return data;
+}
+
+// ------------------ MONTAR MENU ------------------
+async function montarMenu() {
+  const pratosSemana = await fetchPratos();
+  bebidasSemana = await fetchBebidas();
+
+  const hoje = new Date().getDay();
+  pratosDoDia = pratosSemana.filter((prato) => prato.dias.includes(hoje));
+
+  // Montar pratos
+  menuPratos.innerHTML = "";
+  pratosDoDia.forEach((prato, index) => {
+    const item = document.createElement("div");
+    item.classList.add(
+      "flex",
+      "items-center",
+      "justify-start",
+      "gap-4",
+      "p-4",
+      "rounded-lg",
+      "shadow-md",
+      "bg-white"
+    );
+    item.innerHTML = `
+      <img src="${prato.img}" alt="${
+      prato.name
+    }" class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300" />
+      <div>
+        <p class="font-bold">${prato.name}</p>
+        <p class="text-sm">${prato.description}</p>
+        <div class="flex items-center gap-2 justify-between mt-3">
+          <p class="font-bold text-lg">R$ ${prato.price.toFixed(2)}</p>
+          <button class="bg-gray-900 px-5 rounded add-to-cart-btn hover:scale-105 duration-200"
+            data-index="${index}" data-name="${prato.name}" data-price="${
+      prato.price
+    }">
+            <i class="fa fa-cart-plus text-lg text-white"></i>
+          </button>
+        </div>
       </div>
-    </div>
-  `;
-  menuPratos.appendChild(item);
-});
+    `;
+    menuPratos.appendChild(item);
+  });
 
-// ------------------ MONTAR BEBIDAS ------------------
-bebidasSemana.forEach((bebida) => {
-  const item = document.createElement("div");
-  item.classList.add(
-    "flex",
-    "gap-3",
-    "items-center",
-    "bg-white",
-    "rounded-lg",
-    "shadow-md",
-    "p-3"
-  );
-
-  item.innerHTML = `
-    <img
-      src="${bebida.img}"
-      alt="${bebida.name}"
-      class="w-24 h-24 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
-    />
-
-    <div class="flex-1 flex flex-col justify-between h-full">
-      <p class="font-bold">${bebida.name}</p>
-      <p class="text-sm text-gray-500">${bebida.description || ""}</p>
-
-      <div class="flex items-center justify-between mt-3">
-        <p class="font-bold text-lg whitespace-nowrap">R$ ${bebida.price.toFixed(
-          2
-        )}</p>
-        <button
-          class="bg-gray-900 px-5 rounded add-to-cart-btn hover:scale-105 duration-200"
-          data-name="${bebida.name}"
-          data-price="${bebida.price}"
-        >
-          <i class="fa fa-cart-plus text-lg text-white"></i>
-        </button>
+  // Montar bebidas
+  menuBebidas.innerHTML = "";
+  bebidasSemana.forEach((bebida) => {
+    const item = document.createElement("div");
+    item.classList.add(
+      "flex",
+      "gap-3",
+      "items-center",
+      "bg-white",
+      "rounded-lg",
+      "shadow-md",
+      "p-3"
+    );
+    item.innerHTML = `
+      <img src="${bebida.img}" alt="${
+      bebida.name
+    }" class="w-24 h-24 rounded-md hover:scale-110 hover:-rotate-2 duration-300" />
+      <div class="flex-1 flex flex-col justify-between h-full">
+        <p class="font-bold">${bebida.name}</p>
+        <p class="text-sm text-gray-500">${bebida.description || ""}</p>
+        <div class="flex items-center justify-between mt-3">
+          <p class="font-bold text-lg whitespace-nowrap">R$ ${bebida.price.toFixed(
+            2
+          )}</p>
+          <button class="bg-gray-900 px-5 rounded add-to-cart-btn hover:scale-105 duration-200"
+            data-name="${bebida.name}" data-price="${bebida.price}">
+            <i class="fa fa-cart-plus text-lg text-white"></i>
+          </button>
+        </div>
       </div>
-    </div>
-  `;
+    `;
+    menuBebidas.appendChild(item);
+  });
+}
 
-  menuBebidas.appendChild(item);
-});
-
-// ------------------ EVENTOS DE ADIÇÃO AO CARRINHO ------------------
+// ------------------ LISTENER PRINCIPAL ------------------
 [menuPratos, menuBebidas].forEach((container) => {
   container.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart-btn");
@@ -267,56 +175,47 @@ bebidasSemana.forEach((bebida) => {
 
     const name = btn.getAttribute("data-name");
     const price = parseFloat(btn.getAttribute("data-price"));
+    const pratoIndex = btn.getAttribute("data-index");
+    const pratoSelecionado = pratosDoDia[pratoIndex];
 
-    // Se for prato do dia com modal
     if (
       name.includes("Menu do dia") ||
-      name.includes("Menu do Dia + Bebida 350ml (suco ou refri)")
+      name.includes("Menu do Dia + Bebida 350ml")
     ) {
-      const pratoIndex = btn.getAttribute("data-index");
-      const pratoSelecionado = pratosDoDia[pratoIndex];
-      selectedProduct = { name, price };
+      if (!pratoSelecionado) return console.error("Prato não encontrado");
 
-      // Resetar selects
-      tipoFeijao.innerHTML = "";
-      tipoCarne.innerHTML = "";
-      let hasFeijao = pratoSelecionado.feijao.some((f) => f.trim() !== "");
-      let hasCarne = pratoSelecionado.carne.some((c) => c.trim() !== "");
+      selectedProduct = { name, price, prato: pratoSelecionado };
 
-      if (hasFeijao) {
-        tipoFeijao.innerHTML =
-          '<option value="" disabled selected>Selecione um feijão</option>';
-        tipoFeijao.disabled = false;
-        pratoSelecionado.feijao.forEach((f) => {
-          const opt = document.createElement("option");
-          opt.value = f;
-          opt.textContent = f;
-          tipoFeijao.appendChild(opt);
-        });
-        tipoFeijao.parentElement.classList.remove("hidden");
-      } else {
-        tipoFeijao.disabled = true;
-        tipoFeijao.parentElement.classList.add("hidden");
-      }
+      const configureSelect = (selectEl, optionsArray, warnEl) => {
+        const hasOptions =
+          Array.isArray(optionsArray) && optionsArray.length > 0;
+        const parent = selectEl.parentElement;
 
-      if (hasCarne) {
-        tipoCarne.innerHTML =
-          '<option value="" disabled selected>Selecione uma carne</option>';
-        tipoCarne.disabled = false;
-        pratoSelecionado.carne.forEach((c) => {
-          const opt = document.createElement("option");
-          opt.value = c;
-          opt.textContent = c;
-          tipoCarne.appendChild(opt);
-        });
-        tipoCarne.parentElement.classList.remove("hidden");
-      } else {
-        tipoCarne.disabled = true;
-        tipoCarne.parentElement.classList.add("hidden");
-      }
+        if (hasOptions) {
+          selectEl.innerHTML =
+            '<option value="" disabled selected>Selecione...</option>';
+          optionsArray.forEach((opt) => {
+            if (opt && opt.trim() !== "") {
+              const optionEl = document.createElement("option");
+              optionEl.value = opt;
+              optionEl.textContent = opt;
+              selectEl.appendChild(optionEl);
+            }
+          });
+          parent.classList.remove("hidden");
+          selectEl.disabled = false;
+        } else {
+          parent.classList.add("hidden");
+          selectEl.innerHTML = "";
+          selectEl.disabled = true;
+        }
 
-      feijaoWarn.classList.add("hidden");
-      carneWarn.classList.add("hidden");
+        if (warnEl) warnEl.classList.add("hidden");
+      };
+
+      configureSelect(tipoFeijao, pratoSelecionado.feijoes, feijaoWarn);
+      configureSelect(tipoCarne, pratoSelecionado.carnes, carneWarn);
+
       obs.value = "";
       selectModal.classList.remove("hidden");
       selectModal.style.display = "flex";
@@ -330,13 +229,13 @@ bebidasSemana.forEach((bebida) => {
       close: true,
       gravity: "top",
       position: "right",
-      style: { background: "#111827" },
+      style: { backgroundColor: "#111827" },
     }).showToast();
   });
 });
 
 // ------------------ MODAL DE SELEÇÃO ------------------
-closeSelectModalBtn.addEventListener("click", () => fecharSelectModal());
+closeSelectModalBtn.addEventListener("click", fecharSelectModal);
 selectModal.addEventListener("click", (e) => {
   if (e.target === selectModal) fecharSelectModal();
 });
@@ -351,36 +250,31 @@ function fecharSelectModal() {
   carneWarn.classList.add("hidden");
 }
 
+// ------------------ CONFIRMAR SELEÇÃO ------------------
 selectCheckBtn.addEventListener("click", () => {
   let valid = true;
-
   if (!tipoFeijao.disabled && !tipoFeijao.value) {
     feijaoWarn.classList.remove("hidden");
     valid = false;
-  } else {
-    feijaoWarn.classList.add("hidden");
   }
-
   if (!tipoCarne.disabled && !tipoCarne.value) {
     carneWarn.classList.remove("hidden");
     valid = false;
-  } else {
-    carneWarn.classList.add("hidden");
   }
-
   if (!valid) return;
 
   const feijaoSelecionado = tipoFeijao.disabled ? "" : tipoFeijao.value;
   const carneSelecionada = tipoCarne.disabled ? "" : tipoCarne.value;
 
+  Observação = obs.value.trim();
+
   const nameParts = [selectedProduct.name];
   if (feijaoSelecionado) nameParts.push(feijaoSelecionado);
   if (carneSelecionada) nameParts.push(carneSelecionada);
 
-  const name = nameParts.join(" + ");
-  Observação = obs.value;
-
-  addToCart(name, selectedProduct.price);
+  const finalName = nameParts.join(" + ");
+  addToCart(finalName, selectedProduct.price, Observação);
+  fecharSelectModal();
 
   Toastify({
     text: "Produto adicionado!",
@@ -388,95 +282,46 @@ selectCheckBtn.addEventListener("click", () => {
     close: true,
     gravity: "top",
     position: "right",
-    style: { background: "#111827" },
+    style: { backgroundColor: "#111827" },
   }).showToast();
-
-  fecharSelectModal();
-});
-// ------------------ CARRINHO ------------------
-cartbtn.addEventListener("click", () => {
-  cartModal.style.display = "flex";
-  updateCartModal();
-});
-cartModal.addEventListener("click", (e) => {
-  if (e.target === cartModal) cartModal.style.display = "none";
-});
-nextBtn.addEventListener("click", () => {
-  if (cart.length === 0) {
-    Toastify({
-      text: "Carrinho vazio!",
-      duration: 3000,
-      gravity: "top",
-      position: "right",
-      style: { background: "#ef4444" },
-    }).showToast();
-    return;
-  }
-  cartModal.style.display = "none";
-  confCartModal.style.display = "flex";
-});
-closeModalBtn.addEventListener(
-  "click",
-  () => (cartModal.style.display = "none")
-);
-
-// -------------CONFIRMAR PEDIDO------------------
-prevConfBtn.addEventListener("click", () => {
-  confCartModal.style.display = "none";
-  cartModal.style.display = "flex";
 });
 
-function addToCart(name, price) {
+// ------------------ FUNÇÕES CARRINHO ------------------
+function addToCart(name, price, observacao = "") {
   const existingItem = cart.find((item) => item.name === name);
   if (existingItem) existingItem.quantity += 1;
-  else cart.push({ name, price, quantity: 1 });
+  else cart.push({ name, price, quantity: 1, observacao });
   updateCartModal();
 }
 
-// TAXA DE ENTREGA
 function atualizarTaxa() {
-  let taxa = 0;
-  if (retirarLocal.checked) {
-    taxa = 0.0; // RETIRADO NO LOCAL
-  } else {
-    taxa = 4.99; // ENTREGA
-  }
-
-  return taxa;
+  return retirarLocal.checked ? 0 : 4.99;
 }
 
-// Executa quando o usuário marcar/desmarcar
 retirarLocal.addEventListener("change", updateCartModal);
-
-// Já atualiza na primeira vez (caso a página carregue com valor diferente)
-updateCartModal();
 
 function updateCartModal() {
   const taxa = atualizarTaxa();
-
   if (taxa === 0) {
     addressInput.classList.add("hidden");
     textAddress.classList.add("hidden");
-    // Também é bom limpar a validação anterior, se houver
     addressInput.classList.remove("border-red-500");
     addressWarn.classList.add("hidden");
     addressInput.value = "Retirar no local";
+  } else {
+    addressInput.classList.remove("hidden");
+    textAddress.classList.remove("hidden");
+    if (addressInput.value === "Retirar no local") addressInput.value = "";
   }
 
   cartItemsContainer.innerHTML = "";
-
-  taxaEntrega.innerHTML = taxa.toFixed(2);
+  taxaEntrega.textContent = taxa.toFixed(2);
   total = taxa;
 
   cart.forEach((item) => {
-    const cartItemElement = document.createElement("div");
-    cartItemElement.classList.add(
-      "flex",
-      "justify-between",
-      "mb-4",
-      "flex-col"
-    );
-    cartItemElement.innerHTML = `
+    const div = document.createElement("div");
+    div.classList.add("flex", "justify-between", "mb-4", "flex-col");
+    div.innerHTML = `
       <div class="flex items-center justify-between">
         <div>
           <p class="font-medium">${item.name}</p>
@@ -489,7 +334,7 @@ function updateCartModal() {
       </div>
     `;
     total += item.price * item.quantity;
-    cartItemsContainer.appendChild(cartItemElement);
+    cartItemsContainer.appendChild(div);
   });
 
   cartTotal.textContent = total.toLocaleString("pt-BR", {
@@ -534,25 +379,17 @@ document
     radio.addEventListener("change", () => paymentWarn.classList.add("hidden"));
   });
 
-const supabase = window.supabase.createClient(
-  "https://obcjoccntxulnbsdhehk.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9iY2pvY2NudHh1bG5ic2RoZWhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxNTAxOTQsImV4cCI6MjA3MTcyNjE5NH0.eZRu8colIYu925tZEp9p__5GgJS14T1qsbqt3mjTjIQ"
-);
-
-console.log("Conectado ao Supabase!", supabase);
-
-checkoutBtn.addEventListener("click", () => {
+checkoutBtn.addEventListener("click", async () => {
   const taxa = atualizarTaxa();
   const totalCheckout = total;
 
-  const isOpen = checkRestauranteOpen();
-  if (!isOpen) {
+  if (!checkRestauranteOpen()) {
     Toastify({
       text: "Ops! O restaurante está fechado!",
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { background: "#ef4444" },
+      style: { backgroundColor: "#ef4444" },
     }).showToast();
     return;
   }
@@ -565,7 +402,7 @@ checkoutBtn.addEventListener("click", () => {
     return;
   }
 
-  if (taxa > 0 && addressInput.value === "") {
+  if (taxa > 0 && !addressInput.value) {
     addressWarn.classList.remove("hidden");
     addressInput.classList.add("border-red-500");
     return;
@@ -578,10 +415,8 @@ checkoutBtn.addEventListener("click", () => {
     paymentWarn.classList.remove("hidden");
     return;
   }
-
   const metodoPagamento = selectedRadio.value;
-  const obsText =
-    !Observação || Observação.trim() === "" ? "" : Observação.trim();
+  const obsText = Observação || "";
 
   const cartItems = cart
     .map(
@@ -589,110 +424,97 @@ checkoutBtn.addEventListener("click", () => {
         `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}`
     )
     .join("\n");
-  async function gerarNumeroPedido() {
-    // pega o maior número já salvo
-    const { data, error } = await supabase
-      .from("pedidos")
-      .select("numero")
-      .order("numero", { ascending: false })
-      .limit(1);
 
-    if (error) {
-      console.error("Erro ao buscar último número do pedido:", error);
-      return 1; // fallback
-    }
+  const { data: lastOrder } = await supabase
+    .from("pedidos")
+    .select("numero")
+    .order("numero", { ascending: false })
+    .limit(1);
+  const pedidoAtual = (lastOrder[0]?.numero || 0) + 1;
 
-    const ultimo = data[0]?.numero || 0;
-    return ultimo + 1;
-  }
+  const { error } = await supabase.from("pedidos").insert([
+    {
+      numero: pedidoAtual,
+      cliente: nomeInput.value,
+      itens: cartItems,
+      total: totalCheckout.toFixed(2),
+      pagamento: metodoPagamento,
+      endereco: addressInput.value,
+      observacao: obsText,
+      taxa: taxa,
+    },
+  ]);
 
-  async function salvarPedido() {
-    const pedidoAtual = await gerarNumeroPedido();
+  if (error)
+    return Toastify({
+      text: "Erro ao salvar pedido!",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      style: { backgroundColor: "#ef4444" },
+    }).showToast();
 
-    const { data, error } = await supabase.from("pedidos").insert([
-      {
-        numero: pedidoAtual,
-        cliente: nomeInput.value,
-        itens: cartItems,
-        total: totalCheckout,
-        pagamento: metodoPagamento,
-        endereco: addressInput.value,
-        observacao: obsText,
-        taxa: taxa,
-      },
-    ]);
-
-    if (error) {
-      console.error("❌ Erro ao salvar pedido:", error.message);
-      Toastify({
-        text: "Erro ao salvar pedido!",
-        duration: 3000,
-        gravity: "top",
-        position: "right",
-        style: { background: "#ef4444" },
-      }).showToast();
-      return;
-    }
-
-    let fullMessage = "";
-    fullMessage = `
+  const fullMessage = encodeURIComponent(`
 *Pedido:* ${pedidoAtual}
 
 ${cartItems}
 
 *Nome:* ${nomeInput.value}
-
 *Forma de pagamento:* ${metodoPagamento}
-
 *Taxa de entrega:* ${taxa.toFixed(2)}
 *Total:* ${totalCheckout.toFixed(2)}
-
-${Observação ? `*Observação:* ${Observação}` : ""}
-
+${obsText ? `*Observação:* ${obsText}` : ""}
 ${addressInput.value ? `*Endereço:* ${addressInput.value}` : ""}
+  `);
 
-`;
+  const phone = "556298555335";
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent))
+    window.location.href = `whatsapp://send?phone=${phone}&text=${fullMessage}`;
+  else window.open(`https://wa.me/${phone}?text=${fullMessage}`, "_blank");
 
-    const message = encodeURIComponent(fullMessage);
-    const phone = "556298555335";
-    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      window.location.href = `whatsapp://send?phone=${phone}&text=${message}`;
-    } else {
-      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-    }
-
-    cart = [];
-    updateCartModal();
-    addressInput.value = "";
-    confCartModal.style.display = "none";
-
-    console.log("✅ Pedido salvo com sucesso!", data);
-  }
-
-  // chama a função
-  salvarPedido();
+  cart = [];
+  updateCartModal();
+  addressInput.value = "";
+  confCartModal.style.display = "none";
 });
 
-// ------------------ HORÁRIO RESTAURANTE ------------------
-function checkRestauranteOpen() {
-  const data = new Date();
-  const hora = data.getHours();
-  const minuto = data.getMinutes();
-  const diaSemana = data.getDay(); // 0 = Domingo
+// ------------------ MODAIS ------------------
+cartbtn.addEventListener("click", () => {
+  cartModal.style.display = "flex";
+  updateCartModal();
+});
+cartModal.addEventListener("click", (e) => {
+  if (e.target === cartModal) cartModal.style.display = "none";
+});
+nextBtn.addEventListener("click", () => {
+  if (cart.length === 0)
+    return Toastify({
+      text: "Carrinho vazio!",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      style: { backgroundColor: "#ef4444" },
+    }).showToast();
+  cartModal.style.display = "none";
+  confCartModal.style.display = "flex";
+});
+closeModalBtn.addEventListener(
+  "click",
+  () => (cartModal.style.display = "none")
+);
+prevConfBtn.addEventListener("click", () => {
+  confCartModal.style.display = "none";
+  cartModal.style.display = "flex";
+});
 
-  if (diaSemana === 0) return false; // fechado domingo
-
-  const abre = hora > 10 || (hora === 10 && minuto >= 0); // 10:00
-  const fecha = hora < 14 || (hora === 14 && minuto < 30); // 14:30
-
-  return abre && fecha;
-}
-
-const isOpen = checkRestauranteOpen();
-if (isOpen) {
-  spanItem.classList.remove("bg-red-500");
-  spanItem.classList.add("bg-green-600");
-} else {
-  spanItem.classList.remove("bg-green-600");
-  spanItem.classList.add("bg-red-500");
+// ------------------ INICIALIZAÇÃO ------------------
+montarMenu();
+if (!checkRestauranteOpen()) {
+  Toastify({
+    text: "O restaurante está fechado!",
+    duration: 4000,
+    gravity: "top",
+    position: "center",
+    style: { backgroundColor: "#ef4444" },
+  }).showToast();
 }
