@@ -46,29 +46,64 @@ const supabase = window.supabase.createClient(
 );
 
 // ------------------ HORÁRIO ------------------
-function checkRestauranteOpen() {
+async function checkRestauranteOpen() {
   const data = new Date();
   const hora = data.getHours();
   const minuto = data.getMinutes();
   const diaSemana = data.getDay(); // 0 = domingo
 
-  if (diaSemana === 0) return false; // fechado domingo
+  // Mapear o dia para o nome usado no banco
+  const diaMap = {
+    0: "Domingo",
+    1: "Segunda-feira",
+    2: "Terça-feira",
+    3: "Quarta-feira",
+    4: "Quinta-feira",
+    5: "Sexta-feira",
+    6: "Sábado",
+  };
+  const dia = diaMap[diaSemana];
 
-  const inicio = 10 * 60; // 10:00 abri
-  const fim = 14 * 60 + 30; // 14:30 fecha
+  // Buscar o horário do dia no banco
+  const { data: horarioDia, error } = await supabase
+    .from("horarios")
+    .select("*")
+    .eq("dia_semana", dia)
+    .single();
+
+  if (error || !horarioDia) return false;
+  if (!horarioDia.ativo) return false;
+
+  const [aberturaH, aberturaM] = horarioDia.abertura.split(":").map(Number);
+  const [fechamentoH, fechamentoM] = horarioDia.fechamento
+    .split(":")
+    .map(Number);
+
+  const inicio = aberturaH * 60 + aberturaM;
+  const fim = fechamentoH * 60 + fechamentoM;
   const agora = hora * 60 + minuto;
 
   return agora >= inicio && agora <= fim;
 }
 
-const isOpen = checkRestauranteOpen();
-if (isOpen) {
-  spanItem.classList.remove("bg-red-500");
-  spanItem.classList.add("bg-green-600");
-} else {
-  spanItem.classList.remove("bg-green-600");
-  spanItem.classList.add("bg-red-500");
-}
+(async () => {
+  const isOpen = await checkRestauranteOpen();
+  if (isOpen) {
+    spanItem.classList.remove("bg-red-500");
+    spanItem.classList.add("bg-green-600");
+  } else {
+    spanItem.classList.remove("bg-green-600");
+    spanItem.classList.add("bg-red-500");
+
+    Toastify({
+      text: "O restaurante está fechado!",
+      duration: 4000,
+      gravity: "top",
+      position: "center",
+      style: { backgroundColor: "#ef4444" },
+    }).showToast();
+  }
+})();
 
 // ------------------ FUNÇÕES SUPABASE ------------------
 async function fetchPratos() {
@@ -382,8 +417,8 @@ document
 checkoutBtn.addEventListener("click", async () => {
   const taxa = atualizarTaxa();
   const totalCheckout = total;
-
-  if (!checkRestauranteOpen()) {
+  const aberto = await checkRestauranteOpen(); // AQUI USAMOS A VERSÃO ASYNC
+  if (!aberto) {
     Toastify({
       text: "Ops! O restaurante está fechado!",
       duration: 3000,
