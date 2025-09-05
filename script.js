@@ -215,7 +215,9 @@ async function montarMenu() {
 
     if (
       name.includes("Menu do dia") ||
-      name.includes("Menu do Dia + Bebida 350ml")
+      name.includes("Menu do Dia + Bebida 350ml") ||
+      name.includes("Feijoada + Bebida 350ml") ||
+      name.includes("Strogonoff + Bebida 350ml")   
     ) {
       if (!pratoSelecionado) return console.error("Prato não encontrado");
 
