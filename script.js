@@ -38,7 +38,10 @@ let selectedProduct = null;
 let Observação = "";
 let pratosDoDia = [];
 let bebidasSemana = [];
-let map, marker;
+
+// ---------- VARIÁVEIS ADICIONADAS (LOCALIZAÇÃO) ----------
+let userLocation = ""; // endereço escrito obtido via Nominatim
+let userLocationLink = ""; // link Google Maps com lat,lng
 
 // ------------------ SUPABASE ------------------
 const supabase = window.supabase.createClient(
@@ -101,7 +104,7 @@ async function checkRestauranteOpen() {
       duration: 4000,
       gravity: "top",
       position: "center",
-      style: { background: "#ef4444" },
+      style: { backgroundColor: "#ef4444" },
     }).showToast();
   }
 })();
@@ -267,7 +270,7 @@ async function montarMenu() {
       close: true,
       gravity: "top",
       position: "right",
-      style: { background: "#111827" },
+      style: { backgroundColor: "#111827" },
     }).showToast();
   });
 });
@@ -320,7 +323,7 @@ selectCheckBtn.addEventListener("click", () => {
     close: true,
     gravity: "top",
     position: "right",
-    style: { background: "#111827" },
+    style: { backgroundColor: "#111827" },
   }).showToast();
 });
 
@@ -337,40 +340,18 @@ function atualizarTaxa() {
 }
 
 retirarLocal.addEventListener("change", updateCartModal);
-
-function initMap() {
-  // Centro inicial do restaurante
-  const initialCoords = [-16.6786, -49.2578]; // Senador Canedo, GO
-  map = L.map("map").setView(initialCoords, 15);
-
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-  }).addTo(map);
-
-  map.on("click", function (e) {
-    const { lat, lng } = e.latlng;
-
-    if (marker) map.removeLayer(marker);
-
-    marker = L.marker([lat, lng]).addTo(map);
-    document.getElementById("address-coords").value = `${lat},${lng}`;
-  });
-}
-
-// Inicializar mapa quando abrir o modal
-confCartModal.addEventListener("transitionstart", () => {
-  if (!map) initMap();
-});
-
+const btnLocalizacao = document.getElementById("btn-localizacao");
 function updateCartModal() {
   const taxa = atualizarTaxa();
   if (taxa === 0) {
+    btnLocalizacao.classList.add("hidden");
     addressInput.classList.add("hidden");
     textAddress.classList.add("hidden");
     addressInput.classList.remove("border-red-500");
     addressWarn.classList.add("hidden");
     addressInput.value = "Retirar no local";
   } else {
+    btnLocalizacao.classList.remove("hidden");
     addressInput.classList.remove("hidden");
     textAddress.classList.remove("hidden");
     if (addressInput.value === "Retirar no local") addressInput.value = "";
@@ -420,6 +401,75 @@ function removeItemCart(name) {
   }
 }
 
+// ------------------ PEGAR LOCALIZAÇÃO (NOMINATIM - GRATUITO) ------------------
+// Esta função pede permissão, obtém lat/lng e faz reverse geocoding no Nominatim.
+// Não salva nada no banco — só popula userLocation e userLocationLink para envio via WhatsApp.
+async function obterLocalizacaoCliente() {
+  if (!navigator.geolocation) {
+    Toastify({
+      text: "Seu navegador não suporta geolocalização",
+      duration: 3000,
+      gravity: "top",
+      position: "center",
+      style: { backgroundColor: "orange" },
+    }).showToast();
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      // link para abrir no maps
+      userLocationLink = `https://www.google.com/maps?q=${lat},${lng}`;
+
+      try {
+        // Nominatim reverse geocoding (gratuito). Atenção a limites de uso.
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`
+        );
+        if (!response.ok) throw new Error("Nominatim error");
+        const data = await response.json();
+
+        userLocation = data.display_name || `${lat}, ${lng}`;
+
+        Toastify({
+          text: "📍 Localização obtida com sucesso!",
+          duration: 3000,
+          gravity: "top",
+          position: "center",
+          style: { backgroundColor: "green" },
+        }).showToast();
+      } catch (err) {
+        userLocation = `${lat}, ${lng}`;
+        Toastify({
+          text: "Erro ao buscar endereço completo, enviando apenas coordenadas.",
+          duration: 3000,
+          gravity: "top",
+          position: "center",
+          style: { backgroundColor: "orange" },
+        }).showToast();
+      }
+    },
+    (err) => {
+      // erro na permissão ou timeout
+      Toastify({
+        text: "Não foi possível obter sua localização",
+        duration: 3000,
+        gravity: "top",
+        position: "center",
+        style: { backgroundColor: "red" },
+      }).showToast();
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0,
+    }
+  );
+}
+
 // ------------------ FINALIZAR PEDIDO ------------------
 nomeInput.addEventListener("input", (e) => {
   if (e.target.value !== "") {
@@ -444,37 +494,32 @@ document
 checkoutBtn.addEventListener("click", async () => {
   const taxa = atualizarTaxa();
   const totalCheckout = total;
-
-  // Verifica se o restaurante está aberto
-  const aberto = await checkRestauranteOpen();
+  const aberto = await checkRestauranteOpen(); // AQUI USAMOS A VERSÃO ASYNC
   if (!aberto) {
     Toastify({
       text: "Ops! O restaurante está fechado!",
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { background: "#ef4444" },
+      style: { backgroundColor: "#ef4444" },
     }).showToast();
     return;
   }
 
   if (cart.length === 0) return;
 
-  // Valida nome
   if (nomeInput.value === "") {
     nameWarn.classList.remove("hidden");
     nomeInput.classList.add("border-red-500");
     return;
   }
 
-  // Valida endereço se houver taxa de entrega
   if (taxa > 0 && !addressInput.value) {
     addressWarn.classList.remove("hidden");
     addressInput.classList.add("border-red-500");
     return;
   }
 
-  // Valida pagamento
   const selectedRadio = document.querySelector(
     '.input-radio input[type="radio"]:checked'
   );
@@ -483,21 +528,15 @@ checkoutBtn.addEventListener("click", async () => {
     return;
   }
   const metodoPagamento = selectedRadio.value;
-
-  // Observações
   const obsText = Observação || "";
 
-  // Itens do carrinho
   const cartItems = cart
     .map(
       (item) =>
-        `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}${
-          item.observacao ? " | Obs: " + item.observacao : ""
-        }`
+        `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}`
     )
     .join("\n");
 
-  // Último número de pedido
   const { data: lastOrder } = await supabase
     .from("pedidos")
     .select("numero")
@@ -505,10 +544,6 @@ checkoutBtn.addEventListener("click", async () => {
     .limit(1);
   const pedidoAtual = (lastOrder[0]?.numero || 0) + 1;
 
-  // Coords do mapa
-  const coords = document.getElementById("address-coords").value;
-
-  // Inserir pedido no Supabase
   const { error } = await supabase.from("pedidos").insert([
     {
       numero: pedidoAtual,
@@ -519,7 +554,6 @@ checkoutBtn.addEventListener("click", async () => {
       endereco: addressInput.value,
       observacao: obsText,
       taxa: taxa,
-      coordenadas: coords || null, // salva coords se houver
     },
   ]);
 
@@ -529,10 +563,9 @@ checkoutBtn.addEventListener("click", async () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { background: "#ef4444" },
+      style: { backgroundColor: "#ef4444" },
     }).showToast();
 
-  // Montar mensagem WhatsApp
   const fullMessage = encodeURIComponent(`
 *Pedido:* ${pedidoAtual}
 
@@ -540,11 +573,11 @@ ${cartItems}
 
 *Nome:* ${nomeInput.value}
 *Forma de pagamento:* ${metodoPagamento}
-*Taxa de entrega:* R$ ${taxa.toFixed(2)}
-*Total:* R$ ${totalCheckout.toFixed(2)}
+*Taxa de entrega:* ${taxa.toFixed(2)}
+*Total:* ${totalCheckout.toFixed(2)}
 ${obsText ? `*Observação:* ${obsText}` : ""}
 ${addressInput.value ? `*Endereço:* ${addressInput.value}` : ""}
-${coords ? `*Coordenadas:* ${coords}` : ""}
+${userLocation ? `*Localização:* ${userLocationLink}` : ""}
   `);
 
   const phone = "556298555335";
@@ -552,11 +585,12 @@ ${coords ? `*Coordenadas:* ${coords}` : ""}
     window.location.href = `whatsapp://send?phone=${phone}&text=${fullMessage}`;
   else window.open(`https://wa.me/${phone}?text=${fullMessage}`, "_blank");
 
-  // Limpar carrinho e modal
   cart = [];
   updateCartModal();
   addressInput.value = "";
-  document.getElementById("address-coords").value = "";
+  // limpar localização em memória (não salva no banco)
+  userLocation = "";
+  userLocationLink = "";
   confCartModal.style.display = "none";
 });
 
@@ -575,7 +609,7 @@ nextBtn.addEventListener("click", () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { background: "#ef4444" },
+      style: { backgroundColor: "#ef4444" },
     }).showToast();
   cartModal.style.display = "none";
   confCartModal.style.display = "flex";
@@ -597,6 +631,6 @@ if (!checkRestauranteOpen()) {
     duration: 4000,
     gravity: "top",
     position: "center",
-    style: { background: "#ef4444" },
+    style: { backgroundColor: "#ef4444" },
   }).showToast();
 }
