@@ -9,6 +9,11 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,6 +204,10 @@
         <p class="text-red-500 hidden" id="address-warn">
           Digite seu endereço completo!
         </p>
+        <!-- NOVO: mapa para selecionar localização -->
+        <p class="font-bold mt-2">Clique no mapa para marcar a localização:</p>
+        <div id="map" class="w-full h-64 rounded border mb-2"></div>
+        <input type="hidden" id="address-coords" />
 
         <p class="font-bold my-2">Selecione a forma de pagamento:</p>
         <div class="flex gap-2 my-1 input-radio">
@@ -247,6 +256,11 @@
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      crossorigin=""
     ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
