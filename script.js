@@ -38,6 +38,7 @@ let selectedProduct = null;
 let Observação = "";
 let pratosDoDia = [];
 let bebidasSemana = [];
+let map, marker;
 
 // ------------------ SUPABASE ------------------
 const supabase = window.supabase.createClient(
@@ -100,7 +101,7 @@ async function checkRestauranteOpen() {
       duration: 4000,
       gravity: "top",
       position: "center",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
   }
 })();
@@ -217,7 +218,7 @@ async function montarMenu() {
       name.includes("Menu do dia") ||
       name.includes("Menu do Dia + Bebida 350ml") ||
       name.includes("Feijoada + Bebida 350ml") ||
-      name.includes("Strogonoff + Bebida 350ml")   
+      name.includes("Strogonoff + Bebida 350ml")
     ) {
       if (!pratoSelecionado) return console.error("Prato não encontrado");
 
@@ -266,7 +267,7 @@ async function montarMenu() {
       close: true,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#111827" },
+      style: { background: "#111827" },
     }).showToast();
   });
 });
@@ -319,7 +320,7 @@ selectCheckBtn.addEventListener("click", () => {
     close: true,
     gravity: "top",
     position: "right",
-    style: { backgroundColor: "#111827" },
+    style: { background: "#111827" },
   }).showToast();
 });
 
@@ -336,6 +337,30 @@ function atualizarTaxa() {
 }
 
 retirarLocal.addEventListener("change", updateCartModal);
+
+function initMap() {
+  // Centro inicial do restaurante
+  const initialCoords = [-16.6786, -49.2578]; // Senador Canedo, GO
+  map = L.map("map").setView(initialCoords, 15);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+  }).addTo(map);
+
+  map.on("click", function (e) {
+    const { lat, lng } = e.latlng;
+
+    if (marker) map.removeLayer(marker);
+
+    marker = L.marker([lat, lng]).addTo(map);
+    document.getElementById("address-coords").value = `${lat},${lng}`;
+  });
+}
+
+// Inicializar mapa quando abrir o modal
+confCartModal.addEventListener("transitionstart", () => {
+  if (!map) initMap();
+});
 
 function updateCartModal() {
   const taxa = atualizarTaxa();
@@ -419,32 +444,37 @@ document
 checkoutBtn.addEventListener("click", async () => {
   const taxa = atualizarTaxa();
   const totalCheckout = total;
-  const aberto = await checkRestauranteOpen(); // AQUI USAMOS A VERSÃO ASYNC
+
+  // Verifica se o restaurante está aberto
+  const aberto = await checkRestauranteOpen();
   if (!aberto) {
     Toastify({
       text: "Ops! O restaurante está fechado!",
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
     return;
   }
 
   if (cart.length === 0) return;
 
+  // Valida nome
   if (nomeInput.value === "") {
     nameWarn.classList.remove("hidden");
     nomeInput.classList.add("border-red-500");
     return;
   }
 
+  // Valida endereço se houver taxa de entrega
   if (taxa > 0 && !addressInput.value) {
     addressWarn.classList.remove("hidden");
     addressInput.classList.add("border-red-500");
     return;
   }
 
+  // Valida pagamento
   const selectedRadio = document.querySelector(
     '.input-radio input[type="radio"]:checked'
   );
@@ -453,15 +483,21 @@ checkoutBtn.addEventListener("click", async () => {
     return;
   }
   const metodoPagamento = selectedRadio.value;
+
+  // Observações
   const obsText = Observação || "";
 
+  // Itens do carrinho
   const cartItems = cart
     .map(
       (item) =>
-        `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}`
+        `${item.name} | Qtd: ${item.quantity} | R$${item.price.toFixed(2)}${
+          item.observacao ? " | Obs: " + item.observacao : ""
+        }`
     )
     .join("\n");
 
+  // Último número de pedido
   const { data: lastOrder } = await supabase
     .from("pedidos")
     .select("numero")
@@ -469,6 +505,10 @@ checkoutBtn.addEventListener("click", async () => {
     .limit(1);
   const pedidoAtual = (lastOrder[0]?.numero || 0) + 1;
 
+  // Coords do mapa
+  const coords = document.getElementById("address-coords").value;
+
+  // Inserir pedido no Supabase
   const { error } = await supabase.from("pedidos").insert([
     {
       numero: pedidoAtual,
@@ -479,6 +519,7 @@ checkoutBtn.addEventListener("click", async () => {
       endereco: addressInput.value,
       observacao: obsText,
       taxa: taxa,
+      coordenadas: coords || null, // salva coords se houver
     },
   ]);
 
@@ -488,9 +529,10 @@ checkoutBtn.addEventListener("click", async () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
 
+  // Montar mensagem WhatsApp
   const fullMessage = encodeURIComponent(`
 *Pedido:* ${pedidoAtual}
 
@@ -498,10 +540,11 @@ ${cartItems}
 
 *Nome:* ${nomeInput.value}
 *Forma de pagamento:* ${metodoPagamento}
-*Taxa de entrega:* ${taxa.toFixed(2)}
-*Total:* ${totalCheckout.toFixed(2)}
+*Taxa de entrega:* R$ ${taxa.toFixed(2)}
+*Total:* R$ ${totalCheckout.toFixed(2)}
 ${obsText ? `*Observação:* ${obsText}` : ""}
 ${addressInput.value ? `*Endereço:* ${addressInput.value}` : ""}
+${coords ? `*Coordenadas:* ${coords}` : ""}
   `);
 
   const phone = "556298555335";
@@ -509,9 +552,11 @@ ${addressInput.value ? `*Endereço:* ${addressInput.value}` : ""}
     window.location.href = `whatsapp://send?phone=${phone}&text=${fullMessage}`;
   else window.open(`https://wa.me/${phone}?text=${fullMessage}`, "_blank");
 
+  // Limpar carrinho e modal
   cart = [];
   updateCartModal();
   addressInput.value = "";
+  document.getElementById("address-coords").value = "";
   confCartModal.style.display = "none";
 });
 
@@ -530,7 +575,7 @@ nextBtn.addEventListener("click", () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
   cartModal.style.display = "none";
   confCartModal.style.display = "flex";
@@ -552,6 +597,6 @@ if (!checkRestauranteOpen()) {
     duration: 4000,
     gravity: "top",
     position: "center",
-    style: { backgroundColor: "#ef4444" },
+    style: { background: "#ef4444" },
   }).showToast();
 }
