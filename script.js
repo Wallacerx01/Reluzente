@@ -104,7 +104,7 @@ async function checkRestauranteOpen() {
       duration: 4000,
       gravity: "top",
       position: "center",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
   }
 })();
@@ -221,7 +221,9 @@ async function montarMenu() {
       name.includes("Menu do dia") ||
       name.includes("Menu do Dia + Bebida 350ml") ||
       name.includes("Feijoada + Bebida 350ml") ||
-      name.includes("Strogonoff + Bebida 350ml")
+      name.includes("Strogonoff + Bebida 350ml") ||
+      name.includes("Churrasco + Bebida 350ml") ||
+      name.includes("Costelinha ao barbecue + Bebida 350ml")
     ) {
       if (!pratoSelecionado) return console.error("Prato não encontrado");
 
@@ -270,7 +272,7 @@ async function montarMenu() {
       close: true,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#111827" },
+      style: { background: "#111827" },
     }).showToast();
   });
 });
@@ -323,7 +325,7 @@ selectCheckBtn.addEventListener("click", () => {
     close: true,
     gravity: "top",
     position: "right",
-    style: { backgroundColor: "#111827" },
+    style: { background: "#111827" },
   }).showToast();
 });
 
@@ -501,7 +503,7 @@ checkoutBtn.addEventListener("click", async () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
     return;
   }
@@ -563,7 +565,7 @@ checkoutBtn.addEventListener("click", async () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
 
   const fullMessage = encodeURIComponent(`
@@ -609,7 +611,7 @@ nextBtn.addEventListener("click", () => {
       duration: 3000,
       gravity: "top",
       position: "right",
-      style: { backgroundColor: "#ef4444" },
+      style: { background: "#ef4444" },
     }).showToast();
   cartModal.style.display = "none";
   confCartModal.style.display = "flex";
@@ -631,6 +633,6 @@ if (!checkRestauranteOpen()) {
     duration: 4000,
     gravity: "top",
     position: "center",
-    style: { backgroundColor: "#ef4444" },
+    style: { background: "#ef4444" },
   }).showToast();
 }
