@@ -346,9 +346,9 @@ const btnLocalizacao = document.getElementById("btn-localizacao");
 function updateCartModal() {
   const taxa = atualizarTaxa();
   if (taxa === 0) {
-    btnLocalizacao.classList.add("hidden");
     addressInput.classList.add("hidden");
     textAddress.classList.add("hidden");
+    btnLocalizacao.classList.add("hidden");
     addressInput.classList.remove("border-red-500");
     addressWarn.classList.add("hidden");
     addressInput.value = "Retirar no local";
@@ -441,7 +441,7 @@ async function obterLocalizacaoCliente() {
           duration: 3000,
           gravity: "top",
           position: "center",
-          style: { backgroundColor: "green" },
+          style: { background: "green" },
         }).showToast();
       } catch (err) {
         userLocation = `${lat}, ${lng}`;
@@ -450,7 +450,7 @@ async function obterLocalizacaoCliente() {
           duration: 3000,
           gravity: "top",
           position: "center",
-          style: { backgroundColor: "orange" },
+          style: { background: "orange" },
         }).showToast();
       }
     },
@@ -461,7 +461,7 @@ async function obterLocalizacaoCliente() {
         duration: 3000,
         gravity: "top",
         position: "center",
-        style: { backgroundColor: "red" },
+        style: { background: "red" },
       }).showToast();
     },
     {
